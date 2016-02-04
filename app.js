@@ -7,13 +7,11 @@ client.connect( function(err) {
     if(err) {
         return console.error('could not connect to postgres', err);
     }
-    client.query('SELECT NOW() AS "theTime"', function(err, result) {
+    client.query('SELECT rm.* FROM ".SIERRA_record_metadata." INNER JOIN ".SIERRA_bib_view." ON rm.record_num = bv.record_num WHERE rm.record_last_updated_gmt > '".$date."' AND rm.record_type_code = 'b' AND bv.bcode3 = '-' ORDER BY rm.record_last_updated_gmt ASC;', function(err, result) {
         if(err) {
             return console.error('error running query', err);
         }
         console.log(result.rows[0].theTime);
-        console.log('it works');
-        //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
         client.end();
     });
 });
