@@ -21,3 +21,15 @@ client.connect( function(err) {
         client.end();
     });
 });
+
+var ftpClient = require('./lib/client.js'),
+    config = {
+        host: 'localhost',
+        port: 21,
+        user: 'anonymous',
+        password: 'anonymous@'
+    },
+    options = {
+        logging: 'basic'
+    },
+    client = new ftpClient(config, options);
