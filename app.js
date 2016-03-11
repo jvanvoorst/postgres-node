@@ -1,6 +1,6 @@
 var pg = require('pg');
 
-var conString = require('./connection.js');
+var conStringDev = require('./connection.js');
 
 var date = new Date('2016, 1, 1');
 
@@ -8,7 +8,7 @@ var query = "SELECT * FROM sierra_view.record_metadata INNER JOIN sierra_view.bi
 
 console.log('getting records updated since: ' + date);
 
-var client = new pg.Client(conString);
+var client = new pg.Client(conStringDev);
 client.connect( function(err) {
     if(err) {
         return console.error('could not connect to postgres: ', err);
